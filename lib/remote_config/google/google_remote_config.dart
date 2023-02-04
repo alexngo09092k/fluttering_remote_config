@@ -8,6 +8,7 @@ class GoogleRemoteConfig extends BaseRemoteConfig {
     required Duration fetchTimeout,
     required Duration minimumFetchInterval,
   }) {
+    if(!isSupported) return;
     FirebaseRemoteConfig.instance.setConfigSettings(RemoteConfigSettings(
       fetchTimeout: fetchTimeout,
       minimumFetchInterval: minimumFetchInterval,
@@ -38,4 +39,7 @@ class GoogleRemoteConfig extends BaseRemoteConfig {
   Future<bool> initial() {
     return FirebaseRemoteConfig.instance.fetchAndActivate();
   }
+
+  @override
+  bool get isSupported => CurrentPlatform.instance.isMobile;
 }

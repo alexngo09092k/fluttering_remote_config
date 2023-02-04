@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:fluttering/fluttering.dart';
 import '../base_remote_config.dart';
 import './models/remote_config_setting.dart';
@@ -26,7 +25,7 @@ class AwesomeRemoteConfig extends IAwesomeRemoteConfig {
 
   AwesomeRemoteConfig._internal();
 
-  late BaseRemoteConfig _remoteConfig;
+  BaseRemoteConfig? _remoteConfig;
 
   AwesomeRemoteConfigSetting _setting = AwesomeRemoteConfigSetting();
 
@@ -34,9 +33,13 @@ class AwesomeRemoteConfig extends IAwesomeRemoteConfig {
   AwesomeRemoteConfigSetting get setting => _setting;
 
   @override
-  Future<bool> initial(AwesomeRemoteConfigSetting setting) async {
+  Future<void> initial(AwesomeRemoteConfigSetting setting) async {
     _setting = setting;
 
+    /// CHECK ENABLED
+    if(!_setting.enable) return;
+
+    /// CREATE REMOTE CONFIG INSTANCE
     if (_setting.provider == RemoteConfigProvider.google) {
       _remoteConfig = GoogleRemoteConfig(
         minimumFetchInterval: _setting.minimumFetchInterval,
@@ -46,20 +49,23 @@ class AwesomeRemoteConfig extends IAwesomeRemoteConfig {
       _remoteConfig = HuaweiRemoteConfig(
         minimumFetchInterval: _setting.minimumFetchInterval,
       );
-    } else {
-      throw ErrorDescription(
-          'No support InAppPuchase ${_setting.provider.name}');
     }
-    return _remoteConfig.initial();
+
+    _remoteConfig?.initial();
   }
 
   @override
-  Future<String?> getConfig(String key, [String? defaultConfig]) {
-    return _remoteConfig.getConfig(key, defaultConfig);
+  Future<String?> getConfig(String key, [String? defaultConfig]) async {
+    if(_remoteConfig != null && _remoteConfig!.isSupported) {
+      return _remoteConfig!.getConfig(key, defaultConfig);
+    }
+    return defaultConfig;
   }
 
   @override
-  Future<void> setDeaults(Map<String, dynamic> defaults) {
-    return _remoteConfig.setDeaults(defaults);
+  Future<void> setDeaults(Map<String, dynamic> defaults) async {
+    if(_remoteConfig != null && _remoteConfig!.isSupported) {
+      return _remoteConfig!.setDeaults(defaults);
+    }
   }
 }

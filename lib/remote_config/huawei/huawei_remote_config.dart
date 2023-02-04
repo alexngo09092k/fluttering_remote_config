@@ -44,4 +44,7 @@ class HuaweiRemoteConfig extends BaseRemoteConfig {
     }
     return false;
   }
+
+  @override
+  bool get isSupported => DeviceInfo.instance.android != null && (DeviceInfo.instance.android!.manufacturer ?? '').toUpperCase() == 'HUAWEI';
 }

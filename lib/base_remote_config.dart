@@ -8,4 +8,6 @@ abstract class BaseRemoteConfig {
   Future<void> setDeaults(Map<String, dynamic> defaults);
 
   Future<bool> initial();
+
+  bool get isSupported;
 }
