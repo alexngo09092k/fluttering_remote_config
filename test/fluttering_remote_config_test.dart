@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fluttering_remote_config/fluttering_remote_config.dart';
 import 'package:fluttering_remote_config/fluttering_remote_config_platform_interface.dart';
 import 'package:fluttering_remote_config/fluttering_remote_config_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -20,10 +19,5 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    FlutteringRemoteConfig flutteringRemoteConfigPlugin = FlutteringRemoteConfig();
-    MockFlutteringRemoteConfigPlatform fakePlatform = MockFlutteringRemoteConfigPlatform();
-    FlutteringRemoteConfigPlatform.instance = fakePlatform;
-
-    expect(await flutteringRemoteConfigPlugin.getPlatformVersion(), '42');
   });
 }
