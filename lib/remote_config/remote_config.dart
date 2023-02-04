@@ -51,7 +51,7 @@ class AwesomeRemoteConfig extends IAwesomeRemoteConfig {
       );
     }
 
-    _remoteConfig?.initial();
+    await _remoteConfig?.initial();
   }
 
   @override
