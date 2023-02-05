@@ -35,7 +35,7 @@ class HuaweiRemoteConfig extends BaseRemoteConfig {
   @override
   Future<bool> initial() async {
     try {
-      AGCRemoteConfig.instance.fetch(
+      await AGCRemoteConfig.instance.fetch(
         intervalSeconds: _minimumFetchInterval.inSeconds,
       );
       return true;
