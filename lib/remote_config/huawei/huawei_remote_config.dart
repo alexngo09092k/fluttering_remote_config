@@ -18,8 +18,8 @@ class HuaweiRemoteConfig extends BaseRemoteConfig {
   Future<String?> getConfig(String key, [String? defaultConfig]) async {
     try {
       await AGCRemoteConfig.instance.applyLastFetched();
-      String value = await AGCRemoteConfig.instance.getValue(key);
-      if (value.isNotEmpty) return value;
+      String? value = await AGCRemoteConfig.instance.getValue(key);
+      if (value != null && value.isNotEmpty) return value;
       return defaultConfig ?? value;
     } catch (error) {
       Debug.log('HuaweiRemoteConfig getConfig $error');
