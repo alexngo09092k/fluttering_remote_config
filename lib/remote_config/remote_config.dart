@@ -3,7 +3,6 @@ import '../base_remote_config.dart';
 import './models/remote_config_setting.dart';
 import './models/remote_config_provider.dart';
 import './google/google_remote_config.dart';
-import './huawei/huawei_remote_config.dart';
 
 abstract class IAwesomeRemoteConfig extends Provider with ProviderDelegate {
   AwesomeRemoteConfigSetting get setting;
