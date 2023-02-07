@@ -2,7 +2,6 @@ import 'package:fluttering/fluttering.dart';
 import '../base_remote_config.dart';
 import './models/remote_config_setting.dart';
 import './models/remote_config_provider.dart';
-import './google/google_remote_config.dart';
 import './huawei/huawei_remote_config.dart';
 
 abstract class IAwesomeRemoteConfig extends Provider with ProviderDelegate {
@@ -40,12 +39,7 @@ class AwesomeRemoteConfig extends IAwesomeRemoteConfig {
     if(!_setting.enable) return;
 
     /// CREATE REMOTE CONFIG INSTANCE
-    if (_setting.provider == RemoteConfigProvider.google) {
-      _remoteConfig = GoogleRemoteConfig(
-        minimumFetchInterval: _setting.minimumFetchInterval,
-        fetchTimeout: _setting.fetchTimeout,
-      );
-    } else if (_setting.provider == RemoteConfigProvider.huawei) {
+    if (_setting.provider == RemoteConfigProvider.huawei) {
       _remoteConfig = HuaweiRemoteConfig(
         minimumFetchInterval: _setting.minimumFetchInterval,
       );

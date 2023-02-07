@@ -18,7 +18,6 @@ dependencies:
   agconnect_remote_config:
     git:
       url: git@github.com:brennan992k/agconnect_remote_config_plus.git
-  firebase_remote_config: ^3.0.9
 
 dev_dependencies:
   flutter_test:
