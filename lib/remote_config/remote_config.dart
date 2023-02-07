@@ -45,10 +45,6 @@ class AwesomeRemoteConfig extends IAwesomeRemoteConfig {
         minimumFetchInterval: _setting.minimumFetchInterval,
         fetchTimeout: _setting.fetchTimeout,
       );
-    } else if (_setting.provider == RemoteConfigProvider.huawei) {
-      _remoteConfig = HuaweiRemoteConfig(
-        minimumFetchInterval: _setting.minimumFetchInterval,
-      );
     }
 
     await _remoteConfig?.initial();

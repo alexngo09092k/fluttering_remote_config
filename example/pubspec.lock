@@ -9,15 +9,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.12"
-  agconnect_remote_config:
-    dependency: transitive
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: ba0524ba8361013ab744096163b3cf8fb772f722
-      url: "git@github.com:brennan992k/agconnect_remote_config_plus.git"
-    source: git
-    version: "1.2.0+301"
   args:
     dependency: transitive
     description:
