@@ -3,26 +3,26 @@ import './remote_config_provider.dart';
 
 class AwesomeRemoteConfigSetting {
   final bool enable;
-  final RemoteConfigProvider provider;
+  final List<RemoteConfigProvider> providers;
   final Duration fetchTimeout;
   final Duration minimumFetchInterval;
 
   AwesomeRemoteConfigSetting({
     this.enable = false,
-    this.provider = RemoteConfigProvider.google,
+    this.providers = const [],
     this.fetchTimeout = const Duration(milliseconds: 1000 * 60 * 60), /// 1 minutes
     this.minimumFetchInterval = const Duration(milliseconds: 1000 * 60 * 60), /// 1 minutes
   });
 
   AwesomeRemoteConfigSetting copyWith({
     bool? enable,
-    RemoteConfigProvider? provider,
+    List<RemoteConfigProvider>? providers,
     Duration? fetchTimeout,
     Duration? minimumFetchInterval,
   }) {
     return AwesomeRemoteConfigSetting(
       enable: enable ?? this.enable,
-      provider: provider ?? this.provider,
+      providers: providers ?? this.providers,
       fetchTimeout: fetchTimeout ?? this.fetchTimeout,
       minimumFetchInterval: minimumFetchInterval ?? this.minimumFetchInterval,
     );
@@ -31,7 +31,7 @@ class AwesomeRemoteConfigSetting {
   Map<String, dynamic> toMap() {
     return {
       'enable': enable,
-      'provider': provider.name,
+      'providers': providers.map((e) => e.name),
       'fetchTimeout': fetchTimeout.inMilliseconds,
       'minimumFetchInterval': minimumFetchInterval.inMilliseconds,
     };
@@ -40,7 +40,7 @@ class AwesomeRemoteConfigSetting {
   factory AwesomeRemoteConfigSetting.fromMap(Map<String, dynamic> map) {
     return AwesomeRemoteConfigSetting(
       enable: map['enable'] ?? false,
-      provider: RemoteConfigProvider.values.firstWhere((element) => element.name == map['provider']),
+      providers: map['providers'].map((x) => RemoteConfigProvider.values.firstWhere((element) => element.name == x)).toList(),
       fetchTimeout: Duration(milliseconds: map['fetchTimeout'] ?? 0),
       minimumFetchInterval:
           Duration(milliseconds: map['minimumFetchInterval'] ?? 0),
@@ -53,7 +53,7 @@ class AwesomeRemoteConfigSetting {
 
   @override
   String toString() {
-    return 'AwesomeRemoteConfigSetting(enable: $enable, provider: $provider, fetchTimeout: $fetchTimeout, minimumFetchInterval: $minimumFetchInterval)';
+    return 'AwesomeRemoteConfigSetting(enable: $enable, providers: $providers, fetchTimeout: $fetchTimeout, minimumFetchInterval: $minimumFetchInterval)';
   }
 
   @override
@@ -62,7 +62,7 @@ class AwesomeRemoteConfigSetting {
 
     return other is AwesomeRemoteConfigSetting &&
         other.enable == enable &&
-        other.provider == provider &&
+        other.providers == providers &&
         other.fetchTimeout == fetchTimeout &&
         other.minimumFetchInterval == minimumFetchInterval;
   }
@@ -70,7 +70,7 @@ class AwesomeRemoteConfigSetting {
   @override
   int get hashCode {
     return enable.hashCode ^
-        provider.hashCode ^
+        providers.hashCode ^
         fetchTimeout.hashCode ^
         minimumFetchInterval.hashCode;
   }

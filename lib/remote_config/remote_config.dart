@@ -8,8 +8,6 @@ import './huawei/huawei_remote_config.dart';
 abstract class IAwesomeRemoteConfig extends Provider with ProviderDelegate {
   AwesomeRemoteConfigSetting get setting;
 
-  RemoteConfigProvider get provider => setting.provider;
-
   void initial(AwesomeRemoteConfigSetting setting);
 
   Future<String?> getConfig(String key, [String? defaultConfig]);
@@ -25,7 +23,7 @@ class AwesomeRemoteConfig extends IAwesomeRemoteConfig {
 
   AwesomeRemoteConfig._internal();
 
-  BaseRemoteConfig? _remoteConfig;
+  final Map<RemoteConfigProvider, BaseRemoteConfig> _remoteConfigs = {};
 
   AwesomeRemoteConfigSetting _setting = AwesomeRemoteConfigSetting();
 
@@ -40,32 +38,57 @@ class AwesomeRemoteConfig extends IAwesomeRemoteConfig {
     if(!_setting.enable) return;
 
     /// CREATE REMOTE CONFIG INSTANCE
-    if (_setting.provider == RemoteConfigProvider.google) {
-      _remoteConfig = GoogleRemoteConfig(
-        minimumFetchInterval: _setting.minimumFetchInterval,
-        fetchTimeout: _setting.fetchTimeout,
-      );
-    } else if (_setting.provider == RemoteConfigProvider.huawei) {
-      _remoteConfig = HuaweiRemoteConfig(
-        minimumFetchInterval: _setting.minimumFetchInterval,
-      );
+    for (var provider in _setting.providers) {
+      if(!_remoteConfigs.containsKey(provider)) {
+        if (provider == RemoteConfigProvider.google) {
+          _remoteConfigs[provider] = GoogleRemoteConfig(
+            minimumFetchInterval: _setting.minimumFetchInterval,
+            fetchTimeout: _setting.fetchTimeout,
+          );
+        } else if (provider == RemoteConfigProvider.huawei) {
+          _remoteConfigs[provider] = HuaweiRemoteConfig(
+            minimumFetchInterval: _setting.minimumFetchInterval,
+          );
+        }
+        if(_remoteConfigs[provider] != null && _remoteConfigs[provider]!.isSupported) {
+          await _remoteConfigs[provider]!.initial();
+        }
+      }
     }
-
-    await _remoteConfig?.initial();
   }
 
   @override
-  Future<String?> getConfig(String key, [String? defaultConfig]) async {
-    if(_remoteConfig != null && _remoteConfig!.isSupported) {
-      return _remoteConfig!.getConfig(key, defaultConfig);
+  Future<String?> getConfig(String key, [String? defaultConfig, RemoteConfigProvider? provider]) async {
+    if(provider != null) {
+      if(_remoteConfigs[provider] != null && _remoteConfigs[provider]!.isSupported) {
+        return _remoteConfigs[provider]!.getConfig(key, defaultConfig);
+      }
+      return defaultConfig;
+    }else {
+      for (var remoteConfig in _remoteConfigs.values) {
+        if(remoteConfig.isSupported) {
+          final result = await remoteConfig.getConfig(key, null);
+          if(result != null) {
+            return result;
+          }
+        }
+      }
+      return defaultConfig;
     }
-    return defaultConfig;
   }
 
   @override
-  Future<void> setDeaults(Map<String, dynamic> defaults) async {
-    if(_remoteConfig != null && _remoteConfig!.isSupported) {
-      return _remoteConfig!.setDeaults(defaults);
+  Future<void> setDeaults(Map<String, dynamic> defaults, [RemoteConfigProvider? provider]) async {
+    if(provider != null) {
+      if(_remoteConfigs[provider] != null && _remoteConfigs[provider]!.isSupported) {
+        _remoteConfigs[provider]!.setDeaults(defaults);
+      }
+    }else {
+      _remoteConfigs.forEach((key, remoteConfig) {
+        if(remoteConfig.isSupported) {
+          remoteConfig.setDeaults(defaults);
+        }
+      });
     }
   }
 }
