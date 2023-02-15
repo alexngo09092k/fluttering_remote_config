@@ -40,10 +40,9 @@ class AwesomeRemoteConfigSetting {
   factory AwesomeRemoteConfigSetting.fromMap(Map<String, dynamic> map) {
     return AwesomeRemoteConfigSetting(
       enable: map['enable'] ?? false,
-      providers: map['providers'].map((x) => RemoteConfigProvider.values.firstWhere((element) => element.name == x)).toList(),
+      providers: map['providers'].map<RemoteConfigProvider>((x) => RemoteConfigProvider.values.firstWhere((element) => element.name == x)).toList(),
       fetchTimeout: Duration(milliseconds: map['fetchTimeout'] ?? 0),
-      minimumFetchInterval:
-          Duration(milliseconds: map['minimumFetchInterval'] ?? 0),
+      minimumFetchInterval: Duration(milliseconds: map['minimumFetchInterval'] ?? 0),
     );
   }
 
