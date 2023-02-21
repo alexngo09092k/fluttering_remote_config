@@ -53,8 +53,8 @@ class AwesomeRemoteConfig extends IAwesomeRemoteConfig {
         }
       }
       if(remoteConfig != null) {
-        await remoteConfig.initial();
-        _remoteConfigs[provider] = remoteConfig;
+        final done = await remoteConfig.initial();
+        if(done) _remoteConfigs[provider] = remoteConfig;
       }
     }
   }
