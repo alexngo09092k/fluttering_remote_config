@@ -37,9 +37,11 @@ class HuaweiRemoteConfig extends BaseRemoteConfig {
     try {
       _isSupported = !CurrentPlatform.instance.isIos ||await CurrentPlatform.instance.isHmsAvailable;
       Debug.log("HuaweiRemoteConfig is supported $_isSupported");
-      await AGCRemoteConfig.instance.fetch(
-        intervalSeconds: _minimumFetchInterval.inSeconds,
-      );
+      if(_isSupported) {
+        await AGCRemoteConfig.instance.fetch(
+          intervalSeconds: _minimumFetchInterval.inSeconds,
+        );
+      }
       return true;
     } catch (error) {
       Debug.log("HuaweiRemoteConfig initial error $error");

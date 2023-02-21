@@ -40,7 +40,10 @@ class GoogleRemoteConfig extends BaseRemoteConfig {
     try {
       _isSupported = CurrentPlatform.instance.isIos || await CurrentPlatform.instance.isGmsAvailable;
       Debug.log("GoogleRemoteConfig is supported $_isSupported");
-      return FirebaseRemoteConfig.instance.fetchAndActivate();
+      if(_isSupported) {
+        await FirebaseRemoteConfig.instance.fetchAndActivate();
+      }
+      return true;
     }catch(error) {
       Debug.log("GoogleRemoteConfig initial error $error");
     }

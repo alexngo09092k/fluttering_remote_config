@@ -39,20 +39,22 @@ class AwesomeRemoteConfig extends IAwesomeRemoteConfig {
 
     /// CREATE REMOTE CONFIG INSTANCE
     for (var provider in _setting.providers) {
+      BaseRemoteConfig? remoteConfig;
       if(!_remoteConfigs.containsKey(provider)) {
         if (provider == RemoteConfigProvider.google) {
-          _remoteConfigs[provider] = GoogleRemoteConfig(
+          remoteConfig = GoogleRemoteConfig(
             minimumFetchInterval: _setting.minimumFetchInterval,
             fetchTimeout: _setting.fetchTimeout,
           );
         } else if (provider == RemoteConfigProvider.huawei) {
-          _remoteConfigs[provider] = HuaweiRemoteConfig(
+          remoteConfig = HuaweiRemoteConfig(
             minimumFetchInterval: _setting.minimumFetchInterval,
           );
         }
-        if(_remoteConfigs[provider] != null && _remoteConfigs[provider]!.isSupported) {
-          await _remoteConfigs[provider]!.initial();
-        }
+      }
+      if(remoteConfig != null) {
+        await remoteConfig.initial();
+        _remoteConfigs[provider] = remoteConfig;
       }
     }
   }
