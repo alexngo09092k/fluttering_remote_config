@@ -38,11 +38,11 @@ class GoogleRemoteConfig extends BaseRemoteConfig {
   @override
   Future<bool> initial() async {
     try {
-      _isSupported = await CurrentPlatform.instance.isGmsAvailable;
+      _isSupported = CurrentPlatform.instance.isIos || await CurrentPlatform.instance.isGmsAvailable;
       Debug.log("GoogleRemoteConfig is supported $_isSupported");
       return FirebaseRemoteConfig.instance.fetchAndActivate();
     }catch(error) {
-      Debug.log(error);
+      Debug.log("GoogleRemoteConfig initial error $error");
     }
     return false;
   }

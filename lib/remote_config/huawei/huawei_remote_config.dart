@@ -42,7 +42,7 @@ class HuaweiRemoteConfig extends BaseRemoteConfig {
       );
       return true;
     } catch (error) {
-      Debug.log(error);
+      Debug.log("HuaweiRemoteConfig initial error $error");
     }
     return false;
   }
