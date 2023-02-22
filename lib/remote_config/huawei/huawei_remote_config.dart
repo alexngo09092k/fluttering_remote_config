@@ -35,7 +35,7 @@ class HuaweiRemoteConfig extends BaseRemoteConfig {
   @override
   Future<bool> initial() async {
     try {
-      _isSupported = !CurrentPlatform.instance.isIos && await CurrentPlatform.instance.isHmsAvailable;
+      _isSupported = await CurrentPlatform.instance.isHmsAvailable;
       Debug.log("HuaweiRemoteConfig is supported $_isSupported");
       if(_isSupported) {
         await AGCRemoteConfig.instance.fetch(
