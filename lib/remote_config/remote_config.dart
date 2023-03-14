@@ -8,7 +8,7 @@ import './huawei/huawei_remote_config.dart';
 abstract class IAwesomeRemoteConfig extends Provider with ProviderDelegate {
   AwesomeRemoteConfigSetting get setting;
 
-  void initial(AwesomeRemoteConfigSetting setting);
+  Future<void> initial(AwesomeRemoteConfigSetting setting);
 
   Future<String?> getConfig(String key, [String? defaultConfig]);
 
