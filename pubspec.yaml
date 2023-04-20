@@ -1,6 +1,6 @@
 name: fluttering_remote_config
-description: A new Flutter plugin project.
-version: 0.0.1
+description: Remote config for flutter app (support google and huawei)
+version: 1.0.1
 homepage:
 publish_to: none
 

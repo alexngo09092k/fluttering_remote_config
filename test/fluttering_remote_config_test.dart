@@ -19,5 +19,7 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
+    MockFlutteringRemoteConfigPlatform fakePlatform = MockFlutteringRemoteConfigPlatform();
+    FlutteringRemoteConfigPlatform.instance = fakePlatform;
   });
 }
