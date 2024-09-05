@@ -31,7 +31,7 @@ class GoogleRemoteConfig extends BaseRemoteConfig {
   }
 
   @override
-  Future<void> setDeaults(Map<String, dynamic> defaults) {
+  Future<void> setDefaults(Map<String, dynamic> defaults) {
     return FirebaseRemoteConfig.instance.setDefaults(defaults);
   }
 

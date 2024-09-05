@@ -12,7 +12,7 @@ abstract class IAwesomeRemoteConfig extends Provider with ProviderDelegate {
 
   Future<String?> getConfig(String key, [String? defaultConfig]);
 
-  Future<void> setDeaults(Map<String, dynamic> defaults);
+  Future<void> setDefaults(Map<String, dynamic> defaults);
 }
 
 class AwesomeRemoteConfig extends IAwesomeRemoteConfig {
@@ -80,15 +80,15 @@ class AwesomeRemoteConfig extends IAwesomeRemoteConfig {
   }
 
   @override
-  Future<void> setDeaults(Map<String, dynamic> defaults, [RemoteConfigProvider? provider]) async {
+  Future<void> setDefaults(Map<String, dynamic> defaults, [RemoteConfigProvider? provider]) async {
     if(provider != null) {
       if(_remoteConfigs[provider] != null && _remoteConfigs[provider]!.isSupported) {
-        _remoteConfigs[provider]!.setDeaults(defaults);
+        _remoteConfigs[provider]!.setDefaults(defaults);
       }
     }else {
       _remoteConfigs.forEach((key, remoteConfig) {
         if(remoteConfig.isSupported) {
-          remoteConfig.setDeaults(defaults);
+          remoteConfig.setDefaults(defaults);
         }
       });
     }

@@ -28,7 +28,7 @@ class HuaweiRemoteConfig extends BaseRemoteConfig {
   }
 
   @override
-  Future<void> setDeaults(Map<String, dynamic> defaults) {
+  Future<void> setDefaults(Map<String, dynamic> defaults) {
     return AGCRemoteConfig.instance.applyDefaults(defaults);
   }
 

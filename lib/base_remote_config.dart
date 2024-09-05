@@ -5,7 +5,7 @@ abstract class BaseRemoteConfig {
 
   Future<String?> getConfig(String key, [String? defaultConfig]);
 
-  Future<void> setDeaults(Map<String, dynamic> defaults);
+  Future<void> setDefaults(Map<String, dynamic> defaults);
 
   Future<bool> initial();
 
