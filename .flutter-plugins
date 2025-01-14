@@ -2,10 +2,10 @@
 agconnect_remote_config=/Users/anhngo/.pub-cache/git/agconnect_remote_config_plus-99b1cee2e972c880e765a8a348fd5349046f01aa/
 connectivity_plus=/Users/anhngo/.pub-cache/hosted/pub.dev/connectivity_plus-6.0.5/
 device_info_plus=/Users/anhngo/.pub-cache/hosted/pub.dev/device_info_plus-10.1.2/
-firebase_core=/Users/anhngo/.pub-cache/hosted/pub.dev/firebase_core-2.24.2/
-firebase_core_web=/Users/anhngo/.pub-cache/hosted/pub.dev/firebase_core_web-2.10.0/
-firebase_remote_config=/Users/anhngo/.pub-cache/hosted/pub.dev/firebase_remote_config-4.3.8/
-firebase_remote_config_web=/Users/anhngo/.pub-cache/hosted/pub.dev/firebase_remote_config_web-1.4.16/
+firebase_core=/Users/anhngo/.pub-cache/hosted/pub.dev/firebase_core-3.10.0/
+firebase_core_web=/Users/anhngo/.pub-cache/hosted/pub.dev/firebase_core_web-2.19.0/
+firebase_remote_config=/Users/anhngo/.pub-cache/hosted/pub.dev/firebase_remote_config-5.3.0/
+firebase_remote_config_web=/Users/anhngo/.pub-cache/hosted/pub.dev/firebase_remote_config_web-1.7.6/
 huawei_hmsavailability=/Users/anhngo/.pub-cache/hosted/pub.dev/huawei_hmsavailability-6.12.0+300/
 in_app_review=/Users/anhngo/.pub-cache/hosted/pub.dev/in_app_review-2.0.9/
 native_flutter_proxy=/Users/anhngo/.pub-cache/hosted/pub.dev/native_flutter_proxy-0.1.15/
