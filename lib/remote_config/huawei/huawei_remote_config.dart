@@ -1,6 +1,6 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
-import 'package:agconnect_remote_config/agconnect_remote_config.dart';
+import 'package:huawei_remote_config/huawei_remote_config.dart' as hw;
 import 'package:fluttering/fluttering.dart';
 import '../../base_remote_config.dart';
 import '../models/remote_config_provider.dart';
@@ -17,8 +17,8 @@ class HuaweiRemoteConfig extends BaseRemoteConfig {
   @override
   Future<String?> getConfig(String key, [String? defaultConfig]) async {
     try {
-      await AGCRemoteConfig.instance.applyLastFetched();
-      String? value = await AGCRemoteConfig.instance.getValue(key);
+      await hw.HuaweiRemoteConfig.instance.fetchAndApply();
+      String? value = await hw.HuaweiRemoteConfig.instance.getString(key);
       if (value != null && value.isNotEmpty) return value;
       return defaultConfig ?? value;
     } catch (error) {
@@ -29,7 +29,8 @@ class HuaweiRemoteConfig extends BaseRemoteConfig {
 
   @override
   Future<void> setDefaults(Map<String, dynamic> defaults) {
-    return AGCRemoteConfig.instance.applyDefaults(defaults);
+    return hw.HuaweiRemoteConfig.instance
+        .applyDefaults(defaults as Map<String, Object>);
   }
 
   @override
@@ -37,9 +38,9 @@ class HuaweiRemoteConfig extends BaseRemoteConfig {
     try {
       _isSupported = await CurrentPlatform.instance.isHmsAvailable;
       Debug.log("HuaweiRemoteConfig is supported $_isSupported");
-      if(_isSupported) {
-        await AGCRemoteConfig.instance.fetch(
-          intervalSeconds: _minimumFetchInterval.inSeconds,
+      if (_isSupported) {
+        await hw.HuaweiRemoteConfig.instance.fetch(
+          interval: Duration(seconds: _minimumFetchInterval.inSeconds),
         );
       }
       return true;

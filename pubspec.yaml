@@ -13,10 +13,10 @@ dependencies:
     sdk: flutter
   fluttering:
     git:
-      url: git@github.com:brennan992k/fluttering.git
-  agconnect_remote_config:
+      url: git@github.com:alexngo09092k/fluttering.git
+  huawei_remote_config:
     git:
-      url: git@github.com:brennan992k/agconnect_remote_config_plus.git
+      url: git@github.com:alexngo09092k/huawei_remote_config.git
   firebase_remote_config: ^5.3.0
 
 dev_dependencies:
