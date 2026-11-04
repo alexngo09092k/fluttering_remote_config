@@ -1,6 +1,6 @@
 name: fluttering_remote_config
 description: Remote config for flutter app (support google and huawei)
-version: 3.0.0
+version: 3.0.1
 homepage:
 publish_to: none
 
@@ -17,7 +17,7 @@ dependencies:
   huawei_remote_config:
     git:
       url: git@github.com:alexngo09092k/huawei_remote_config.git
-  firebase_remote_config: ^5.3.0
+  firebase_remote_config: ^7.0.1
 
 dev_dependencies:
   flutter_test:
