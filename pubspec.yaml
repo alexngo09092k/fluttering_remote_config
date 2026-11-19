@@ -15,7 +15,10 @@ dependencies:
     sdk: flutter
   fluttering: ^4.0.0
   firebase_remote_config: ^7.0.1
-  fluttering_huawei_remote_config: ^1.0.0
+  huawei_remote_config:
+    git:
+      url: git@github.com:alexngo09092k/huawei_remote_config.git
+
 
 dev_dependencies:
   flutter_test:
