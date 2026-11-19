@@ -16,8 +16,7 @@ dependencies:
   fluttering: ^4.0.0
   firebase_remote_config: ^7.0.1
   huawei_remote_config:
-    git:
-      url: git@github.com:alexngo09092k/huawei_remote_config.git
+    path: ./packages/huawei_remote_config 
 
 
 dev_dependencies:
