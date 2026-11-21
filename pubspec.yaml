@@ -15,9 +15,6 @@ dependencies:
     sdk: flutter
   fluttering: ^4.0.0
   firebase_remote_config: ^7.0.1
-  huawei_remote_config:
-    path: ./packages/huawei_remote_config 
-
 
 dev_dependencies:
   flutter_test:
@@ -32,3 +29,8 @@ topics:
   - feature-flags
 
 flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.huawei_remote_config
+        pluginClass: HuaweiRemoteConfigPlugin

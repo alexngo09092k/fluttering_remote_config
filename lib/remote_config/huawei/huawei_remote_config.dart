@@ -1,9 +1,7 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe
-
-import 'package:huawei_remote_config/huawei_remote_config.dart' as hw;
 import 'package:fluttering/fluttering.dart';
 import '../../base_remote_config.dart';
 import '../models/remote_config_provider.dart';
+import '../../src/huawei_remote_config.dart' as hw;
 
 class HuaweiRemoteConfig extends BaseRemoteConfig {
   @override
